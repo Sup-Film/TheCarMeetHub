@@ -6,5 +6,6 @@ export class ValidateUserDto {
   @IsNotEmpty()
   email: string;
 
+  @IsString()
   userId: string;
 }

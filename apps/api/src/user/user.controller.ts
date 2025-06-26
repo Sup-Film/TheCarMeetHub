@@ -18,4 +18,9 @@ export class UserController {
   create(@Body() registerUserDto: RegisterUserDto) {
     return this.userService.create(registerUserDto);
   }
+
+  @Get('/profile')
+  async getProfile() {
+    return 'test';
+  }
 }

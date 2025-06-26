@@ -9,4 +9,7 @@ export class LoginUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsString()
+  userId?: string;
 }
