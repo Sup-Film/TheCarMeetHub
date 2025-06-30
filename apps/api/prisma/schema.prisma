@@ -19,4 +19,5 @@ model User {
   password String
   name     String
   tel      String
+  googleId String? @unique
 }

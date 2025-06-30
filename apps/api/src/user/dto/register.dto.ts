@@ -13,4 +13,7 @@ export class RegisterUserDto {
 
   @IsString()
   tel: string;
+
+  @IsString()
+  googleId?: string; // Optional for Google sign-in
 }

@@ -16,18 +16,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     super({
-      // ใช้ ExtractJwt.fromExtractors เพื่อดึง access_token จาก cookies ไปให้กับ JWT Strategy
+      // รองรับทั้ง cookie (access_token) และ Authorization header (Bearer)
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request) => {
-          return request?.cookies?.access_token;
-        },
+        (request: Request) => request?.cookies?.access_token,
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
       ]),
       ignoreExpiration: false,
       secretOrKey: jwtSecret,
     });
   }
 
-  validate(payload: any) {
-    return { userId: payload.userId, email: payload.email };
+  validate(payload: { userId: string; email: string; role?: string }) {
+    // สามารถเพิ่มข้อมูลอื่น ๆ ที่ต้องการแนบกับ req.user ได้ที่นี่
+    return { userId: payload.userId, email: payload.email, role: payload.role };
   }
 }
